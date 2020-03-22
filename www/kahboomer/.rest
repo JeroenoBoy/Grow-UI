@@ -1,0 +1,7 @@
+POST http://localhost:6969/api/findKahoot HTTP/1.1
+header: application/json
+
+{
+	"pin": 123,
+	"name": "name"
+}
