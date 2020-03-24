@@ -1,4 +1,4 @@
-POST http://localhost:6969/api/findKahoot HTTP/1.1
+POST http://play-minecity.nl:42069/api/findKahoot HTTP/1.1
 header: application/json
 
 {

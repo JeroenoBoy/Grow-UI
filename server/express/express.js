@@ -19,7 +19,7 @@ app.use(express.json({ limit: '1kb' }));
  * Routers
  */
 
-app.use('/', express.static('client/public'));
+app.use('/', express.static('www/public'));
 app.use('/', require('./routes/index'));
 app.use('/api', require('./routes/api'));
 // app.use('/admin', require('./client/routes/admin'));

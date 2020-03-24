@@ -4,61 +4,53 @@
  * Dependencies
  */
 
-const { fork } = require('child_process');
-
-const sendBots = require('./sendBots');
-const findKahoot = require('./findKahoot');
-
 //Socket.io
 const io = require('socket.io')();
+const dataHandler = require('../API/dataHandler.js');
+
 io.on('connect', async (socket) => {
 	console.log('A new client connected!');
 
-	const spr = fork('./childProcesses/bot.js');
-
-	spr.on('exit', () => {
-		console.log('Child process closed');
+	socket.on('requestContent', (pack) => {
+		if (pack.time != dataHandler.time) {
+			const rtr = dataHandler.get(pack.cat);
+			io.emit('contentUpdate', {
+				time: dataHandler.time,
+				data: rtr,
+				cat: pack.cat
+			});
+		}
+		else socket.emit('contentUpdate', { err: 'Time is the same!' });
 	});
 
-	spr.on('message', (packet) => {
-		const data = packet.data;
-		switch (packet.type) {
-			case 'clientBot':
-				socket.emit('Finder__Response', data.msg);
-				break;
-			case 'fastJoin':
-				socket.emit('Fastjoin__Update', data);
-				break;
-		}
+	socket.on('addItem', (cat) => {
+		dataHandler.add(cat);
+
+		const rtr = dataHandler.get(cat);
+		io.emit('contentUpdate', {
+			time: dataHandler.time,
+			data: rtr,
+			cat: cat
+		});
+	});
+
+	socket.on('editItem', (item) => {
+		const rt = dataHandler.edit(item);
+		if (rt.err) throw err;
+		const rtr = dataHandler.get(item.cat);
+		io.emit('contentUpdate', {
+			time: dataHandler.time,
+			data: rtr,
+			cat: item.cat
+		});
+	});
+
+	socket.on('getCatagories', (packet) => {
+		socket.emit('catagoryList', dataHandler.getCatagories());
 	});
 
 	socket.on('disconnect', () => {
 		console.log('A client disconnected!');
-		spr.kill();
-	});
-
-	socket.on('findKahoot', (packet) => {
-		findKahoot(socket, packet, spr);
-	});
-
-	socket.on('sendBots', (packet) => {
-		sendBots(socket, packet, spr);
-	});
-
-	socket.on('test', (packet) => {
-		spr.send({
-			type: 'testProxy',
-			data: {}
-		});
-	});
-
-	socket.on('fastJoin', (packet) => {
-		spr.send({
-			type: 'fastJoin',
-			data: {
-				amount: packet.amount
-			}
-		});
 	});
 });
 

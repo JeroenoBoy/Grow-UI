@@ -1,17 +1,14 @@
 //
 const route = require('express').Router();
+const parser = require('../parser.js');
+const dataHandler = require('../../API/dataHandler');
 
-route.post('/findKahoot', (req, res) => {
-	setTimeout(() => {
-		console.log(req.body);
-		if (typeof req.body.pin != 'number')
-			res.status(400).send({ msg: 'INVALID_PIN' });
-		else if (typeof req.body.name != 'string')
-			res.status(400).send({ msg: 'INVALID_NAME' });
-		else if (typeof req.body.name.length > 20)
-			res.status(400).send({ msg: 'INVALID_NAME' });
-		else res.status(202).send({ msg: 'SUCCES' });
-	}, 2000 + Math.random() * 2000);
+route.get('/parseData', (req, res) => {
+	res.send(parser());
+});
+
+route.get('/time', (req, res) => {
+	res.send(`${dataHandler.data.time}`);
 });
 
 module.exports = route;
