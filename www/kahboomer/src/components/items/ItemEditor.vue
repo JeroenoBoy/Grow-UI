@@ -21,8 +21,18 @@
             />
           </v-row>
           <v-row class="ma-0 pa-0">
-            <v-btn color="col-7 success" @click="() => {$emit('complete'); this.editItem()}">Edit</v-btn>
-            <v-btn color="col-5 error" @click="$emit('complete')">Cancel</v-btn>
+            <v-col class="col-4 pa-0 ma-0 px-1">
+              <v-btn color="col-12 success" @click="() => {$emit('complete'); this.editItem()}">Edit</v-btn>
+            </v-col>
+            <v-col class="col-4 pa-0 ma-0 px-1">
+              <v-btn color="col-12 warning" @click="$emit('complete')">Cancel</v-btn>
+            </v-col>
+            <v-col class="col-4 pa-0 ma-0 px-1">
+              <v-btn
+                color="col-12 error"
+                @click="() => {$emit('complete'); this.deleteItem()}"
+              >Delete</v-btn>
+            </v-col>
           </v-row>
         </v-form>
       </v-card>
@@ -48,6 +58,9 @@ export default {
   methods: {
     editItem() {
       this.$socket.client.emit("editItem", this.item);
+    },
+    deleteItem() {
+      this.$socket.client.emit("deleteItem", this.item);
     }
   }
 };

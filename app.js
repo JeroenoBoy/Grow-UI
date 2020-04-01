@@ -13,7 +13,7 @@ const SocketIO = require('./server/socket/socket.io.js');
  * Setup
  */
 
-const port = process.env.port || 5000;
+const port = process.env.port || 42069;
 const server = http.createServer(app);
 
 server.listen(port, () => console.log(`Listening on ${port}`));

@@ -45,6 +45,17 @@ io.on('connect', async (socket) => {
 		});
 	});
 
+	socket.on('deleteItem', (item) => {
+		const rt = dataHandler.remove(item.id);
+		if (rt.err) throw err;
+		const rtr = dataHandler.get(item.cat);
+		io.emit('contentUpdate', {
+			time: dataHandler.time,
+			data: rtr,
+			cat: item.cat
+		});
+	});
+
 	socket.on('getCatagories', (packet) => {
 		socket.emit('catagoryList', dataHandler.getCatagories());
 	});

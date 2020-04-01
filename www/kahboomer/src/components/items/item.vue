@@ -9,9 +9,9 @@
           :src="require(`@/assets/items/${this.itemImage()}.png`)"
         />
       </v-col>
-      <v-col class="col-5 pa-0 ma-0 pr-0">
+      <v-col class="col-7 pa-0 ma-0 pr-0">
         <v-card-title class="subtitle-2 pr-0">{{item.name}}</v-card-title>
-        <v-card-subtitle class="caption pr-0">Item Id: {{item.item}}</v-card-subtitle>
+        <v-card-subtitle class="caption pr-0">Item Id: {{this.itemImage()}}</v-card-subtitle>
       </v-col>
     </v-row>
 
@@ -57,8 +57,9 @@ export default {
     itemImage() {
       const itm = this.item.item.split(":");
       if (!itm[1]) return `${itm[0]}-0`;
-      return `${itm[0]}-${itm[1]}}`;
+      return `${itm[0]}-${itm[1]}`;
     }
   }
 };
 </script>
+

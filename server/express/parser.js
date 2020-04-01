@@ -1,4 +1,4 @@
-const data = require('../api/dataHandler');
+const data = require('../API/dataHandler');
 
 const split1 = '/ehakjhh151/';
 const split2 = '/eufi123/';

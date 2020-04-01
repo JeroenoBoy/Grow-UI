@@ -54,11 +54,25 @@ class thisClass {
 			sell: parseInt(item.sell),
 			sellable: item.sellable
 		};
+		this.data.time++;
 		this.saveData();
 		return { msg: 'SUCCES' };
 	}
 
-	remove () {}
+	remove (id) {
+		if (!this.data.items[id]) return { err: 'Invalid item' };
+		let item = this.data.items[id];
+
+		let rtr = [];
+		for (let i in this.data.catagories[item.cat])
+			if (i != item.id) rtr.push(this.data.catagories[item.cat][i]);
+		this.data.catagories[item.cat] = rtr;
+
+		delete this.data.items[id];
+		this.data.time++;
+		this.saveData();
+		return { msg: 'SUCCES' };
+	}
 
 	get (cat, item = 'all') {
 		if (!this.data.catagories[cat]) return { err: 'Invalid catagory' };
