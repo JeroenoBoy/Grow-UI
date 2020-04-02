@@ -50,8 +50,8 @@ class thisClass {
 			cat: item.cat,
 			item: item.item,
 			name: item.name,
-			buy: parseInt(item.buy),
-			sell: parseInt(item.sell),
+			buy: parseFloat(item.buy),
+			sell: parseFloat(item.sell),
 			sellable: item.sellable
 		};
 		this.data.time++;

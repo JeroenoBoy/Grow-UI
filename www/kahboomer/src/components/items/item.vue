@@ -15,7 +15,7 @@
       </v-col>
     </v-row>
 
-    <v-card-text display="flex" class="py-1 px-5 row">
+    <v-card-text display="flex" class="pa-0 py-1 pl-5 mr-0 row">
       <div class="col-7 pa-0 ma-0">
         <v-icon>store</v-icon>
         <span>Buy</span>
@@ -25,7 +25,7 @@
       </div>
     </v-card-text>
 
-    <v-card-text display="flex" class="py-1 px-5 row">
+    <v-card-text display="flex" class="pa-0 py-1 pl-5 mr-0 row">
       <div class="col-7 pa-0 ma-0">
         <v-icon>storefront</v-icon>
         <span>Sell</span>

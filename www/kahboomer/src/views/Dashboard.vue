@@ -19,7 +19,7 @@
             <v-col
               v-for="item in items"
               :key="item.id"
-              class="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2"
+              class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2"
             >
               <itemContainer
                 v-on:click="() => {clickedItem = item; editItemEnabled = true}"

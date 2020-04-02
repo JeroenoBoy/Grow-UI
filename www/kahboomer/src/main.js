@@ -7,7 +7,7 @@ import router from './router';
 
 Vue.config.productionTip = false;
 
-const socket = io('http://play-minecity.nl:42069');
+const socket = io('localhost:6969');
 Vue.use(VueSocketIO, socket);
 
 new Vue({
